@@ -1,6 +1,6 @@
 <template>
   <div class="upload">
-    <input type="file" @change="onFileSelected" accept=".csv, text/plain" />
+    <input type="file" @change="onFileSelected" accept=".csv, text/plain, .xlsx" />
     <v-btn color="info" @click="onUpload">Upload</v-btn>
   </div>
 </template>
@@ -21,6 +21,7 @@ export default {
     },
     onUpload() {
       const fd = new FormData();
+      fd.append("date", new Date());
       fd.append("data", this.selectedFile, this.selectedFile.name);
       this.$axios
         .$post("/upload", fd, {
@@ -30,6 +31,9 @@ export default {
                 Math(uploadEvent.loaded / uploadEvent.total) +
                 "%"
             );
+          },
+          headers: {
+            "Content-Type": "multipart/form-data"
           }
         })
         .then(res => {
