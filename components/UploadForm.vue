@@ -24,7 +24,7 @@ export default {
       fd.append("date", new Date());
       fd.append("data", this.selectedFile, this.selectedFile.name);
       this.$axios
-        .$post("/upload", fd, {
+        .$post("/create", fd, {
           onUploadProgess: uploadEvent => {
             console.log(
               "Upload progess:" +
