@@ -20,6 +20,7 @@ export default {
       console.log(this.selectedFile);
     },
     onUpload() {
+      this.$parent.on_upload();
       const fd = new FormData();
       fd.append("date", new Date());
       fd.append("data", this.selectedFile, this.selectedFile.name);
@@ -38,6 +39,8 @@ export default {
         })
         .then(res => {
           console.log(res);
+          this.$parent.processor_id[0] = res.id;
+          this.$parent.on_uploaded();
         });
       console.log(fd);
     }
