@@ -25,9 +25,8 @@ export default {
     },
     watch: {
         complete: function (newStatus, oldSatus) {
-            self = this;
             setTimeout(function () {
-                self.success = true;
+                this.success = true;
             }, 1000);
             this.next_task();
         }
@@ -49,16 +48,14 @@ export default {
                 .then(res => {
                     console.log(res.data);
                     if(res.data.id == 0){
-                        self = this
-                        setTimeout(self.next_task, 5000) // Try after 5 seconds
+                        setTimeout(this.next_task, 5000) // Try after 5 seconds
                         console.log("Not found Try after 5 seconds")
                         return;
                     }
                     this.$parent.processor_id[this.index] = res.data.id
                     this.$parent.tasks[this.index].complete = true;
                 }).catch(error => {
-                    self = this
-                    setTimeout(self.next_task, 5000) // Try after 5 seconds
+                    setTimeout(this.next_task, 5000) // Try after 5 seconds
                     console.log("Error Try after 5 seconds")
                     console.log(error);
                 })
