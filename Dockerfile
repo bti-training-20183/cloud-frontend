@@ -2,4 +2,6 @@ FROM node:lts-alpine
 COPY . /app
 WORKDIR /app
 RUN npm install
-CMD [ "npm", "run", "dev"]
+RUN npm run build
+EXPOSE 3000
+CMD ["npm", "start"]
